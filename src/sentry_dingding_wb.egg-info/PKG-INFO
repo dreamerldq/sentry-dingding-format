@@ -1,0 +1,36 @@
+Metadata-Version: 2.1
+Name: sentry-dingding-wb
+Version: 1.0.5
+Summary: A Sentry extension which send errors stats to DingDing
+Home-page: https://github.com/dreamerldq/sentry-dingding-format
+Author: dreamerldq
+Author-email: 845790692@qq.com
+License: MIT
+Description: # Sentry-DingDing
+        
+        Fork `https://github.com/anshengme/sentry-dingding`
+        
+        Fix  `Sentry 10 or the same error`
+        
+        [sentry-dingding issues](https://github.com/anshengme/sentry-dingding/issues/22)
+        
+        ```
+        'Event' object has no attribute 'id' 
+        ```
+        
+        ## 安装
+        
+        ```
+        # requirement.txt
+        
+        sentry-10-dingding
+        ```
+        
+        docker-compose 安装的直接改成这个插件包就好了，如果帮你解决了问题，麻烦给个小星星.
+        
+        
+Keywords: sentry dingding
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 2.7
+Classifier: License :: OSI Approved :: MIT License
+Description-Content-Type: text/markdown
