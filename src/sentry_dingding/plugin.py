@@ -53,21 +53,24 @@ class DingDingPlugin(NotificationPlugin):
         access_token = self.get_option('access_token', group.project)
         send_url = DingTalk_API.format(token=access_token)
         title = u'【%s】的项目异常' % event.project.slug
-
-        data = {
-            "msgtype": "markdown",
-            "markdown": {
-                "title": title,
-                "text": u"#### {title} \n\n > {message} \n\n > {device} \n\n > {uid} \n\n > {path} \n\n [详细信息]({url})".format(
-                    title=title,
-                    device=event.get_tag('device'),
-                    uid=event.get_tag('uid'),
-                    path=event.get_tag('url'),
-                    message=event.title or event.message,
-                    url=u"{}events/{}/".format(group.get_absolute_url(), event.event_id),
-                )
+        if event.project.slug == "devops-ehr":
+            from .ops_talk import ops_talk
+            data = ops_talk(group, event, *args, **kwargs)
+        else:
+            data = {
+                "msgtype": "markdown",
+                "markdown": {
+                    "title": title,
+                    "text": u"#### {title} \n\n > {message} \n\n > {device} \n\n > {uid} \n\n > {path} \n\n [详细信息]({url})".format(
+                        title=title,
+                        device=event.get_tag('device'),
+                        uid=event.get_tag('uid'),
+                        path=event.get_tag('url'),
+                        message=event.title or event.message,
+                        url=u"{}events/{}/".format(group.get_absolute_url(), event.event_id),
+                    )
+                }
             }
-        }
         requests.post(
             url=send_url,
             headers={"Content-Type": "application/json"},
